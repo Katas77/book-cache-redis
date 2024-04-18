@@ -29,6 +29,7 @@ public class BookServiceImpl implements BookInterface {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
 
+
     @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITIES, key = "#title+#author")
     @Override
     public Book findByTitle(String title, String author) {
