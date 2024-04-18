@@ -1,0 +1,30 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  jpa:
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/app_db5
+    username: Roma5
+    password: Roma5
+    hikari:
+      schema: app_schema
+      connection-init-sql: create schema if not exists app_schema
+      connection-timeout: 10000
+server:
+  port: 8080
+app:
+  redis:
+    enabled: tru
+  cache:
+    cacheType: redis
+    cacheNames:
+      -databaseEntity
+      -databaseEntitiesByCategory
+    caches:
+      databaseEntity:
+        expiry: 10m
+      databaseEntitiesByCategory:
+        expiry: 10m
