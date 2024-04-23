@@ -24,7 +24,7 @@ public class Category implements Serializable {
     private String category;
 
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<Book> books = new ArrayList<>();

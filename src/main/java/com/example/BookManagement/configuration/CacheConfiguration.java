@@ -25,7 +25,7 @@ public class CacheConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "app.redis", name = "enable", havingValue = "true")
-    @ConditionalOnExpression("${app.cache.cacheType)'.equals('redis')")
+    @ConditionalOnExpression("${app.cache.cacheType} == 'REDIS'")
     public CacheManager redisCacheManager(AppCacheProperties appCacheProperties, LettuceConnectionFactory lettuceConnectionFactory) {
         var defaultConfig = RedisCacheConfiguration.defaultCacheConfig();
         Map<String, RedisCacheConfiguration> redisCacheConfiguration = new HashMap<>();
@@ -42,6 +42,10 @@ public class CacheConfiguration {
     }
 
 }
+
+
+
+
 
 
 
