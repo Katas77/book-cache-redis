@@ -65,7 +65,7 @@ public class BookServiceImpl implements BookInterface {
     public Book findById(Long id) {
         Optional<Book> userOptional = bookRepository.findById(id);
         if (userOptional.isPresent()) {
-            return bookRepository.findById(id).get();
+            return userOptional.get();
         } else {
             throw new EntityNotFoundException(MessageFormat.format("Book with ID {0} not found", id));
         }
@@ -102,7 +102,7 @@ public class BookServiceImpl implements BookInterface {
     public ResponseEntity<String> deleteById(Long id) {
         Optional<Book> userOptional = bookRepository.findById(id);
         if (userOptional.isEmpty()) {
-            return ResponseEntity.ok(MessageFormat.format("Book with ID {0} not found", id));
+            return ResponseEntity.ofNullable(MessageFormat.format("Book with ID {0} not found", id));
         } else {
             bookRepository.deleteById(id);
             return ResponseEntity.ok(MessageFormat.format("Book with ID {0}  deleted", id));
