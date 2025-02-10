@@ -1,16 +1,5 @@
 version: '3'
 services:
-  postgres:
-    image: postgres:12.3
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=Roma5
-      - POSTGRES_PASSWORD=Roma5
-      - POSTGRES_DB=app_db5
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-
   redis:
     image: redis:7.0.12
     ports:

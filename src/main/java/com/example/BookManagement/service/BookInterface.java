@@ -15,11 +15,11 @@ public interface BookInterface {
 
     Book findById(Long id);
 
-    ResponseEntity<String> save(Book book, Category category);
+    String save(Book book, Category category);
 
-    ResponseEntity<String> update(Book book, Category category);
+    String update(Book book, Category category);
 
-    ResponseEntity<String> deleteById(Long id);
+    String deleteById(Long id);
 
 
 }

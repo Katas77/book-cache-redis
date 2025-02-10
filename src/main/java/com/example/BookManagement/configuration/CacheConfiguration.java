@@ -22,7 +22,6 @@ import java.util.Map;
 @Configuration
 @EnableCaching
 public class CacheConfiguration {
-
     @Bean
     @ConditionalOnProperty(prefix = "app.redis", name = "enable", havingValue = "true")
     @ConditionalOnExpression("${app.cache.cacheType} == 'REDIS'")

@@ -1,4 +1,4 @@
-package com.example.BookManagement.web.dto.book;
+package com.example.BookManagement.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookListResponse implements Serializable {
-    private List<BookResponse> userResponses = new ArrayList<>();
+    private List<BookResponse> bookResponses = new ArrayList<>();
 }
