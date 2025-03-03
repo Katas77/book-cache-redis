@@ -1,4 +1,4 @@
-<div align="center"><b>📚 BookManagement 📚</b></div>
+# 📚 BookManagement 📚
 
 ## Overview 🌍
 ## The BookManagement application is a small console-based program built on the Representational State Transfer (REST) architecture. It provides a RESTful API for managing books, offering features such as finding, creating, updating, and deleting books.
@@ -20,12 +20,6 @@
 - git clone https://github.com/Katas77
 - Navigate to the project directory:
 
-## Run the application:  
-## General usage:  
-- Use Spring Boot Data JPA and PostgreSQL for database operations.
-- Configure and launch the database using Docker.
-- Start Docker services:  
-- Go to the docker subdirectory:
 
 
 ## Usage 📖
@@ -35,13 +29,13 @@
 - Books are managed through a simple command-line interface (CLI).
 - Input validation ensures graceful handling of incorrect inputs, providing clear feedback to the user.
 ## Technologies Used 🛠️
-Java 🟢
-Spring Boot 🚄
-Docker 🐋
-Spring Boot Data JPA 📝
-Redis 🔁
-Spring Boot Cache 🕒
-📬 Contact Us:Need help or have questions? Reach out at krp77@mail.ru.
+- Java 🟢
+- Spring Boot 🚄
+- Docker 🐋
+- Spring Boot Data JPA 📝
+- Redis 🔁
+- Spring Boot Cache 🕒
+
 
 
 ____
