@@ -1,4 +1,3 @@
-
 package com.example.BookManagement.model;
 
 import jakarta.persistence.*;

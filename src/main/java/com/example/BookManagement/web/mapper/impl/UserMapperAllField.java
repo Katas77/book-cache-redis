@@ -1,6 +1,5 @@
 package com.example.BookManagement.web.mapper.impl;
 
-
 import com.example.BookManagement.model.Book;
 import com.example.BookManagement.model.Category;
 import com.example.BookManagement.web.dto.BookResponse;
@@ -8,7 +7,6 @@ import com.example.BookManagement.web.dto.BookRequest;
 import com.example.BookManagement.web.mapper.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 
 @Component
 @AllArgsConstructor

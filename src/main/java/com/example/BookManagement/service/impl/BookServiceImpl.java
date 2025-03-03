@@ -15,11 +15,9 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
-
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -32,10 +30,9 @@ public class BookServiceImpl implements BookInterface {
     @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITIES, key = "#title+#author")
     @Override
     public Book findByTitle(String title, String author) {
-            return bookRepository.findByAuthorAndTitle(author, title)
-                    .orElseThrow(() -> new BusinessLogicException(
-                            MessageFormat.format("Book with title {0} and author {1} not found", title, author)));
-
+        return bookRepository.findByAuthorAndTitle(author, title)
+                .orElseThrow(() -> new BusinessLogicException(
+                        MessageFormat.format("Book with title {0} and author {1} not found", title, author)));
     }
 
     @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, key = "#category")
@@ -57,43 +54,42 @@ public class BookServiceImpl implements BookInterface {
     }
 
     @Transactional
-    @Caching(evict = {@CacheEvict(value = "databaseEntity", allEntries = true),
-            @CacheEvict(value = "databaseEntitiesByCategory", allEntries = true)})
+    @Caching(evict = {
+            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY, allEntries = true),
+            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, allEntries = true)})
     @Override
     public String save(Book book, Category category) {
-        noCategory(category);
-        Category existingCategory = categoryRepository.findByCategory(category.getCategory())
-                .orElseGet(() -> categoryRepository.save(category));
-        book.setCategory(existingCategory);
+        handleCategory(category);
+        book.setCategory(category);
         bookRepository.save(book);
         return MessageFormat.format("Книга с названием {0} сохранена", book.getId());
     }
 
     @Transactional
-    @Caching(evict = {@CacheEvict(value = "databaseEntity", allEntries = true),
-            @CacheEvict(value = "databaseEntitiesByCategory", allEntries = true)})
+    @Caching(evict = {
+            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY, allEntries = true),
+            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, allEntries = true)})
     @Override
     public String update(Book book, Category category) {
-        noCategory(category);
-        Category existingCategory = categoryRepository.findByCategory(category.getCategory())
-                .orElseGet(() -> categoryRepository.save(category));
+        handleCategory(category);
         Book existedBook = findById(book.getId());
         BeanUtils.copyNonNullProperties(book, existedBook);
-        existedBook.setCategory(existingCategory);
+        existedBook.setCategory(category);
         bookRepository.save(existedBook);
         return MessageFormat.format("Книга с ID {0} обновлена", book.getId());
     }
 
     @Transactional
-    @Caching(evict = {@CacheEvict(value = "databaseEntity", allEntries = true),
-            @CacheEvict(value = "databaseEntitiesByCategory", allEntries = true)})
+    @Caching(evict = {
+            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY, allEntries = true),
+            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, allEntries = true)})
     @Override
     public String deleteById(Long id) {
         bookRepository.deleteById(id);
         return MessageFormat.format("Книга с ID {0} удалена", id);
     }
 
-    private void noCategory(Category category) {
+    private void handleCategory(Category category) {
         if (!categoryRepository.existsByCategory(category.getCategory())) {
             categoryRepository.save(category);
         }

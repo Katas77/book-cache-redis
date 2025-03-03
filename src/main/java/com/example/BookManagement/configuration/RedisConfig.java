@@ -1,4 +1,3 @@
-
 package com.example.BookManagement.configuration;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

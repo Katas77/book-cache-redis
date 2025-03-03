@@ -1,6 +1,4 @@
-
 package com.example.BookManagement.configuration;
-
 
 import com.example.BookManagement.configuration.properties.AppCacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -17,7 +15,6 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 @Configuration
 @EnableCaching
