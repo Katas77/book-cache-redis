@@ -1,7 +1,7 @@
-# 📚 BookManagement 📚
+# 📚 BookManagement 
 
 ## Overview 🌍
-## The BookManagement application is a small console-based program built on the Representational State Transfer (REST) architecture. It provides a RESTful API for managing books, offering features such as finding, creating, updating, and deleting books.
+## The BookManagement application is a compact console-based program designed as a practical exercise in utilizing caching with Redis. 🔴⚪
 
 ## Features 🧩
 -  🔍 Find a single book by its title and author

@@ -27,7 +27,7 @@ public class BookServiceImpl implements BookInterface {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
 
-    @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITIES, key = "#title+#author")
+    @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITY, key = "#title+#author")
     @Override
     public Book findByTitle(String title, String author) {
         return bookRepository.findByAuthorAndTitle(author, title)
@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookInterface {
                         MessageFormat.format("Book with title {0} and author {1} not found", title, author)));
     }
 
-    @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, key = "#category")
+    @Cacheable(cacheNames = AppCacheProperties.CacheNames.ENTITY_BY_CATEGORY, key = "#category")
     @Override
     public List<Book> findCategory(String category) {
         long categoryId = categoryRepository.findByCategory(category)
@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookInterface {
     @Transactional
     @Caching(evict = {
             @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY, allEntries = true),
-            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, allEntries = true)})
+            @CacheEvict(value = AppCacheProperties.CacheNames.ENTITY_BY_CATEGORY, allEntries = true)})
     @Override
     public String save(Book book, Category category) {
         handleCategory(category);
@@ -68,7 +68,7 @@ public class BookServiceImpl implements BookInterface {
     @Transactional
     @Caching(evict = {
             @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY, allEntries = true),
-            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, allEntries = true)})
+            @CacheEvict(value = AppCacheProperties.CacheNames.ENTITY_BY_CATEGORY, allEntries = true)})
     @Override
     public String update(Book book, Category category) {
         handleCategory(category);
@@ -82,7 +82,7 @@ public class BookServiceImpl implements BookInterface {
     @Transactional
     @Caching(evict = {
             @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY, allEntries = true),
-            @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY_BY_CATEGORY, allEntries = true)})
+            @CacheEvict(value = AppCacheProperties.CacheNames.ENTITY_BY_CATEGORY, allEntries = true)})
     @Override
     public String deleteById(Long id) {
         bookRepository.deleteById(id);
