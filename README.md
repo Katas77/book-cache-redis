@@ -1,4 +1,4 @@
-# 📚 BookManagement 
+# BookManagement  📚
 
 ## Overview 🌍
 ## The BookManagement application is a compact console-based program designed as a practical exercise in utilizing caching with Redis. 🔴⚪
