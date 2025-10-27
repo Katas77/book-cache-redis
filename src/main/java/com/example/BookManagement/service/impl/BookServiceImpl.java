@@ -27,7 +27,7 @@ public class BookServiceImpl implements BookInterface {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
 
-    @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITY, key = "#title+#author")
+    @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITY, key = "#title + '::' + #author")//проверить кэш по указанному имени и ключу; если есть значение — вернуть его и НЕ вызывать метод; если нет — выполнить метод и сохранить результат в кэш под этим ключом
     @Override
     public Book findByTitle(String title, String author) {
         return bookRepository.findByAuthorAndTitle(author, title)
@@ -68,7 +68,7 @@ public class BookServiceImpl implements BookInterface {
     @Transactional
     @Caching(evict = {
             @CacheEvict(value = AppCacheProperties.CacheNames.DATABASE_ENTITY, allEntries = true),
-            @CacheEvict(value = AppCacheProperties.CacheNames.ENTITY_BY_CATEGORY, allEntries = true)})
+            @CacheEvict(value = AppCacheProperties.CacheNames.ENTITY_BY_CATEGORY, allEntries = true)})//@CacheEvict — говорит Spring: «удалить(и) записи из кэша».  Параметр allEntries = true — удалить ВСЕ записи в данном кэше. - Где возможно — удаляйте конкретные ключи вместо полного очищения.
     @Override
     public String update(Book book, Category category) {
         handleCategory(category);

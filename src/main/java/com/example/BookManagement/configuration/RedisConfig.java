@@ -10,11 +10,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-@ConditionalOnProperty(prefix = "app.redis", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "app.redis", name = "enabled", havingValue = "true")
 public class RedisConfig {
 
     @Bean
-    public LettuceConnectionFactory LettuceConnectionFactory(RedisProperties redisProperties) {
+    public LettuceConnectionFactory lettuceConnectionFactory(RedisProperties redisProperties) {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setHostName(redisProperties.getHost());
         configuration.setPort(redisProperties.getPort());
@@ -28,8 +28,8 @@ public class RedisConfig {
         template.setKeySerializer(new StringRedisSerializer());
         return template;
     }
-
 }
+
 
 
 

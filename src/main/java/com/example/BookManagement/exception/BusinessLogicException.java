@@ -3,7 +3,6 @@ package com.example.BookManagement.exception;
 public class BusinessLogicException extends RuntimeException {
     public BusinessLogicException () {
     }
-
     public BusinessLogicException (Exception cause) {
         super(cause);
     }
@@ -15,6 +14,5 @@ public class BusinessLogicException extends RuntimeException {
     public BusinessLogicException (String message, Exception cause) {
         super(message, cause);
     }
-
 
 }
