@@ -65,4 +65,11 @@ public class RedisDumper {
             return null;
         });
     }
+
+    public void cleanupRedis() {
+        redisTemplate.execute((RedisCallback<Object>) connection -> {
+        connection.flushAll();
+        return null;
+    });}
+
 }

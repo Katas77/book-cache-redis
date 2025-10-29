@@ -30,6 +30,7 @@ public class BookServiceImpl implements BookInterface {
     @Cacheable(cacheNames = AppCacheProperties.CacheNames.DATABASE_ENTITY, key = "#title + '::' + #author")//проверить кэш по указанному имени и ключу; если есть значение — вернуть его и НЕ вызывать метод; если нет — выполнить метод и сохранить результат в кэш под этим ключом
     @Override
     public Book findByTitle(String title, String author) {
+        System.out.println(": public Book findByTitle(String title, String author)     ");
         return bookRepository.findByAuthorAndTitle(author, title)
                 .orElseThrow(() -> new BusinessLogicException(
                         MessageFormat.format("Book with title {0} and author {1} not found", title, author)));

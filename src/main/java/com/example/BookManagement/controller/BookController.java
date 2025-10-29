@@ -1,5 +1,6 @@
 package com.example.BookManagement.controller;
 
+import com.example.BookManagement.redisDumper.RedisDumper;
 import com.example.BookManagement.service.BookInterface;
 import com.example.BookManagement.web.dto.BookListResponse;
 import com.example.BookManagement.web.dto.BookRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
     private final Mapper mapper;
     private final BookInterface service;
+    private final RedisDumper redisDumper;
 
     @GetMapping("/{title}/{author}")
     public BookResponse findTitleAndAuthor(@PathVariable String title, @PathVariable String author) {
@@ -25,7 +27,6 @@ public class BookController {
     public BookListResponse findCategory(@PathVariable String category) {
         return mapper.bookListResponseList(service.findCategory(category));
     }
-
 
     @PostMapping
     public String create(@RequestBody @Valid BookRequest request) {

@@ -21,7 +21,6 @@ public class Book implements Serializable {
     @Column(name = "author")
     private String author;
 
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     @ToString.Exclude

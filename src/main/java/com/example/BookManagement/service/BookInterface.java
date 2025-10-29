@@ -2,7 +2,7 @@ package com.example.BookManagement.service;
 
 import com.example.BookManagement.model.Book;
 import com.example.BookManagement.model.Category;
-import org.springframework.http.ResponseEntity;
+
 
 
 import java.util.List;
@@ -20,6 +20,5 @@ public interface BookInterface {
     String update(Book book, Category category);
 
     String deleteById(Long id);
-
 
 }

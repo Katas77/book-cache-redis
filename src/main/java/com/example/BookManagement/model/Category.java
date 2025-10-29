@@ -22,7 +22,6 @@ public class Category implements Serializable {
     @Column(name = "category")
     private String category;
 
-
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default

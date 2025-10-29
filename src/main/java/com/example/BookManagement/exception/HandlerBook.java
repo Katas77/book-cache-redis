@@ -16,7 +16,6 @@ public class HandlerBook {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(e.getMessage());
-
     }
 
     @ExceptionHandler(RuntimeException .class)
@@ -25,9 +24,6 @@ public class HandlerBook {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body((e.getMessage()));
-
     }
-
-
 }
 
