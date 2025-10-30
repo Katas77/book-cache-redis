@@ -1,5 +1,6 @@
 package com.example.BookManagement.controller;
 
+import com.example.BookManagement.model.Book;
 import com.example.BookManagement.redisDumper.RedisDumper;
 import com.example.BookManagement.service.BookInterface;
 import com.example.BookManagement.web.dto.BookListResponse;
@@ -8,7 +9,10 @@ import com.example.BookManagement.web.dto.BookResponse;
 import com.example.BookManagement.web.mapper.Mapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.MessageFormat;
 
 @RestController
 @RequestMapping("/api/book")
@@ -20,6 +24,7 @@ public class BookController {
 
     @GetMapping("/{title}/{author}")
     public BookResponse findTitleAndAuthor(@PathVariable String title, @PathVariable String author) {
+        redisDumper.dumpAllToConsole();
         return mapper.bookToResponse(service.findByTitle(title, author));
     }
 
@@ -29,8 +34,8 @@ public class BookController {
     }
 
     @PostMapping
-    public String create(@RequestBody @Valid BookRequest request) {
-        return service.save(mapper.requestToBook(request), mapper.requestToCategory(request));
+    public ResponseEntity<String>create(@RequestBody @Valid BookRequest request) {
+        return ResponseEntity.ok(MessageFormat.format("Книга с названием {0} сохранена", service.save(mapper.requestToBook(request), mapper.requestToCategory(request)).getId()));
     }
 
     @PutMapping("/{id}")
