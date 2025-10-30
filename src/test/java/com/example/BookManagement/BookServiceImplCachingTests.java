@@ -1,6 +1,5 @@
 package com.example.BookManagement;
 
-
 import com.example.BookManagement.model.Book;
 import com.example.BookManagement.model.Category;
 import com.example.BookManagement.repository.BookRepository;
@@ -59,9 +58,6 @@ public class BookServiceImplCachingTests {
 
     @Autowired
     private CategoryRepository categoryRepository;
-
-
-
     private Book sample;
     private Category sampleCategory;
 
@@ -71,7 +67,6 @@ public class BookServiceImplCachingTests {
         sample.setId(1L);
         sample.setTitle("Test Title");
         sample.setAuthor("Test Author");
-
         sampleCategory = new Category();
         sampleCategory.setId(10L);
         sampleCategory.setCategory("SCIENCE");
@@ -121,15 +116,13 @@ public class BookServiceImplCachingTests {
 
         when(bookRepository.save(any(Book.class))).thenReturn(saved);
 
-        // save должен вернуть Book и @CachePut положить его в кэш по #result.id
         Book result = bookService.save(toSave, sampleCategory);
 
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(42L);
 
-        clearInvocations(bookRepository); // очищаем счётчики вызовов для проверки кэша
+        clearInvocations(bookRepository);
 
-        // при чтении по id repository.findById НЕ должен вызываться (значение из кэша)
         Book cached = bookService.findById(42L);
         assertThat(cached).isNotNull();
         assertThat(cached.getId()).isEqualTo(42L);

@@ -4,7 +4,6 @@ import com.example.BookManagement.model.Book;
 import com.example.BookManagement.model.Category;
 
 
-
 import java.util.List;
 
 public interface BookInterface {

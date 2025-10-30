@@ -1,7 +1,5 @@
 package com.example.BookManagement.controller;
 
-import com.example.BookManagement.model.Book;
-import com.example.BookManagement.redisDumper.RedisDumper;
 import com.example.BookManagement.service.BookInterface;
 import com.example.BookManagement.web.dto.BookListResponse;
 import com.example.BookManagement.web.dto.BookRequest;
@@ -20,11 +18,9 @@ import java.text.MessageFormat;
 public class BookController {
     private final Mapper mapper;
     private final BookInterface service;
-    private final RedisDumper redisDumper;
 
     @GetMapping("/{title}/{author}")
     public BookResponse findTitleAndAuthor(@PathVariable String title, @PathVariable String author) {
-        redisDumper.dumpAllToConsole();
         return mapper.bookToResponse(service.findByTitle(title, author));
     }
 
@@ -34,7 +30,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<String>create(@RequestBody @Valid BookRequest request) {
+    public ResponseEntity<String> create(@RequestBody @Valid BookRequest request) {
         return ResponseEntity.ok(MessageFormat.format("Книга с названием {0} сохранена", service.save(mapper.requestToBook(request), mapper.requestToCategory(request)).getId()));
     }
 
