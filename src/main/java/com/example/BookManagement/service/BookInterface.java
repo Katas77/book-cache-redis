@@ -1,7 +1,7 @@
 package com.example.BookManagement.service;
 
 import com.example.BookManagement.model.Book;
-import com.example.BookManagement.model.Category;
+
 
 
 import java.util.List;
@@ -14,9 +14,9 @@ public interface BookInterface {
 
     Book findById(Long id);
 
-    Book save(Book book, Category category);
+    Book save(Book book);
 
-    String update(Book book, Category category);
+    String update( Long id,Book book);
 
     String deleteById(Long id);
 

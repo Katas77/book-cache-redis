@@ -1,6 +1,6 @@
-package com.example.BookManagement.web.dto;
+package com.example.BookManagement.jackson_book;
 
-public record BookResponse(
+public record BookDto(
         Long id,
         String title,
         String author,

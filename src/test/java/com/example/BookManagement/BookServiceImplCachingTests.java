@@ -113,10 +113,8 @@ public class BookServiceImplCachingTests {
         saved.setTitle("New Book");
         saved.setAuthor("New Author");
         saved.setCategory(sampleCategory);
-
         when(bookRepository.save(any(Book.class))).thenReturn(saved);
-
-        Book result = bookService.save(toSave, sampleCategory);
+        Book result = bookService.save(toSave);
 
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(42L);

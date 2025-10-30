@@ -18,9 +18,17 @@ public class HandlerBook {
                 .body(e.getMessage());
     }
 
-    @ExceptionHandler(RuntimeException .class)
-    public ResponseEntity<String> handleExceptionNull(RuntimeException  e) {
+    @ExceptionHandler(NullPointerException  .class)
+    public ResponseEntity<String> handleExceptionNull(NullPointerException  e) {
         log.error("NullPointerException is    calling {}", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body((e.getMessage()));
+    }
+
+    @ExceptionHandler(IllegalArgumentException .class)
+    public ResponseEntity<String> handleIllegalArgumentException (IllegalArgumentException  e) {
+        log.error("IllegalArgumentException is    calling {}", e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body((e.getMessage()));
