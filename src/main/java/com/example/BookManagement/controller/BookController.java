@@ -21,7 +21,6 @@ public class BookController {
 
     @GetMapping("/{title}/{author}")
     public BookResponse findTitleAndAuthor(@PathVariable String title, @PathVariable String author) {
-    dumper.dumpAllToConsole();
         return mapper.toResponse(service.findByTitle(title, author));
     }
 

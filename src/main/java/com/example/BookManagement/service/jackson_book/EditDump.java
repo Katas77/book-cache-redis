@@ -43,7 +43,6 @@ public class EditDump {
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
     public void initializeDatabaseFromDumpIfEmpty() {
-        System.out.println("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         if (bookRepository.count() == 0) {
             List<BookDto> dtos = loadBooksFromFile();
             if (!dtos.isEmpty()) {
