@@ -20,16 +20,6 @@ server:
   port: 8080
 
 app:
-  redis:
-    enabled: true
-
-  cache:
-    cacheType: REDIS
-    cacheNames:
-      - databaseEntity
-      - databaseEntitiesByCategory
-    caches:
-      databaseEntity:
-        expiry: 10m
-      databaseEntitiesByCategory:
-        expiry: 10m
+  book:
+    dump:
+      enabled: false

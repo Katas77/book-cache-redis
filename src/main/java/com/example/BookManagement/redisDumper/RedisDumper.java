@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-//@Component
+@Component
 public class RedisDumper {
 
     @Autowired
@@ -70,6 +70,6 @@ public class RedisDumper {
         redisTemplate.execute((RedisCallback<Object>) connection -> {
         connection.flushAll();
         return null;
-    });}
+    });} //очистка
 
 }

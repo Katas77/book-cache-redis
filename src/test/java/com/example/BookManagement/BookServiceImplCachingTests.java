@@ -20,6 +20,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
+import static com.example.BookManagement.configuration.redis.condition.AppConstants.CACHE_DATABASE_ENTITIES_BY_CATEGORY;
+import static com.example.BookManagement.configuration.redis.condition.AppConstants.CACHE_DATABASE_ENTITY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -31,7 +33,7 @@ public class BookServiceImplCachingTests {
     private BookInterface bookService;
 
     @Configuration
-    @EnableCaching // включаем кэширование в тестовом контексте
+    @EnableCaching
     static class TestConfig {
         @Bean
         public BookRepository bookRepository() {
@@ -47,8 +49,8 @@ public class BookServiceImplCachingTests {
         public ConcurrentMapCacheManager cacheManager() {
             // in-memory замена Redis для unit-тестов
             return new ConcurrentMapCacheManager(
-                    com.example.BookManagement.configuration.properties.AppCacheProperties.CacheNames.DATABASE_ENTITY,
-                    com.example.BookManagement.configuration.properties.AppCacheProperties.CacheNames.ENTITY_BY_CATEGORY
+                    CACHE_DATABASE_ENTITY,
+                    CACHE_DATABASE_ENTITIES_BY_CATEGORY
             );
         }
     }
@@ -83,7 +85,7 @@ public class BookServiceImplCachingTests {
 
         assertThat(first).isNotNull();
         assertThat(second).isNotNull();
-        assertThat(first).isSameAs(second); // в ConcurrentMapCache возвращается тот же объект
+        assertThat(first).isSameAs(second);
 
         verify(bookRepository, times(1)).findById(1L);
     }

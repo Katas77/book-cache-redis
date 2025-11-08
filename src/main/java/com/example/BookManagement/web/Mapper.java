@@ -2,7 +2,6 @@ package com.example.BookManagement.web;
 
 import com.example.BookManagement.model.Book;
 import com.example.BookManagement.model.Category;
-import com.example.BookManagement.repository.BookRepository;
 import com.example.BookManagement.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,6 @@ import com.example.BookManagement.web.dto.BookResponse;
 @RequiredArgsConstructor
 public class Mapper {
     private final CategoryRepository repository;
-    private final BookRepository bookRepository;
     public BookResponse toResponse(Book book) {
         return new BookResponse(
                 book.getId(),

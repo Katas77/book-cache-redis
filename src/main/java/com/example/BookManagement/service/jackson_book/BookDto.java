@@ -1,4 +1,4 @@
-package com.example.BookManagement.jackson_book;
+package com.example.BookManagement.service.jackson_book;
 
 public record BookDto(
         Long id,

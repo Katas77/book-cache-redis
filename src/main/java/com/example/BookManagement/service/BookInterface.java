@@ -2,8 +2,6 @@ package com.example.BookManagement.service;
 
 import com.example.BookManagement.model.Book;
 
-
-
 import java.util.List;
 
 public interface BookInterface {

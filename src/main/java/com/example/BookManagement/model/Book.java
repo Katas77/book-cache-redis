@@ -10,15 +10,16 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "book")
+@Entity
+@Table(name = "books")
 public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false, length = 255)
     private String title;
-    @Column(name = "author")
+    @Column(name = "author", nullable = false, length = 255)
     private String author;
 
     @ManyToOne
